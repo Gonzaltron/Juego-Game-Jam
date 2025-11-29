@@ -10,6 +10,7 @@ public class Lungs : MonoBehaviour
     [SerializeField] TMPro.TextMeshProUGUI lungCapText;
     bool recovery;
     bool depleting;
+    [SerializeField] PlayerManager playerManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,16 +23,15 @@ public class Lungs : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && depleting)
+        if(playerManager.LungsTriggered && depleting)
         {
+            Debug.Log("Lungs recovery started");
             StopAllCoroutines();
             recovery = true;
         }
-        else if(Input.GetKeyUp(KeyCode.Space))
+       else if(!playerManager.LungsTriggered)
         {
             recovery = false;
-            StartCoroutine(DepleteLungCap());
-            depleting = true;
         }
 
         if(recovery)

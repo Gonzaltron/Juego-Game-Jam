@@ -166,6 +166,7 @@ MonoBehaviour:
   MaxLungCap: 50
   DepletionWaitTime: 1
   lungCapText: {fileID: 1854994974}
+  playerManager: {fileID: 1208024848}
 --- !u!1 &1140273057
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,6 +303,58 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -89}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1208024847
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1208024849}
+  - component: {fileID: 1208024848}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1208024848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208024847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200949470136f694aac5ed5e6b7770f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerControls: {fileID: 0}
+  actionMapName: Player
+  movement: Move
+  rotation: Look
+  heart: Heart
+  lungs: Lungs
+  leftEye: LeftEye
+  rightEye: RightEye
+--- !u!4 &1208024849
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208024847}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 616.2181, y: 248.67155, z: 128.76031}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1405886760
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,3 +940,4 @@ SceneRoots:
   - {fileID: 1405886761}
   - {fileID: 1996190161}
   - {fileID: 383708628}
+  - {fileID: 1208024849}

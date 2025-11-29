@@ -15,6 +15,7 @@ public class Righteye : MonoBehaviour
     int timerGuardar;
     int State;
     int NewState;
+    [SerializeField] PlayerManager playerManager;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,16 +29,19 @@ public class Righteye : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+         if(playerManager.LeftEyeTriggered)
         {
-            StopAllCoroutines();
-            if(timer >= maxtimer*0.75f)
+            if(timer >= maxtimer*0.9f)
             {
                 timer = maxtimer;
             }
             else
-            {
-                timer += maxtimer/6;
+            {   
+                if(!recovery)
+                {
+                    StopAllCoroutines();
+                    StartCoroutine(Recovery());
+                }
             }
             StartCoroutine(Timer());
         }
@@ -127,5 +131,13 @@ public class Righteye : MonoBehaviour
         }
         Debug.Log("Game Over");
         // se apaga la pantalla
+    }
+
+     IEnumerator Recovery()
+    {
+        recovery = true;
+        timer += 5;
+        yield return new WaitForSeconds(0.1f);
+        recovery = false;
     }
 }
