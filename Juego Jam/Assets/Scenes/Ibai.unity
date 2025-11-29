@@ -160,14 +160,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 383708626}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae6e56cb93fc08a4bacd393cf2c9782d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f9a382c01b7ec94ab0169636d4b002d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mintimer: 50
-  maxtimer: 75
-  quickTime: 5
-  debugText: {fileID: 1854994974}
-  stateText: {fileID: 1140273058}
+  MaxLungCap: 50
+  DepletionWaitTime: 1
+  lungCapText: {fileID: 1854994974}
 --- !u!1 &1140273057
 GameObject:
   m_ObjectHideFlags: 0
