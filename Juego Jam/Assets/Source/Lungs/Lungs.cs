@@ -23,7 +23,7 @@ public class Lungs : MonoBehaviour
         for (int i = 0; i < maxLungTimer; i++)
         {
             yield return new WaitForSeconds(lungstimer);
-            while(Input.GetKey(/*el que sea*/))
+            //while(Input.GetKey(/*el que sea*/))
             {
                 for(int j = 0; j < maxLungTimer; j++)
                 {
