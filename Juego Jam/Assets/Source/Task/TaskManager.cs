@@ -25,7 +25,7 @@ public class TaskManager
             random = Random.Range(0, maxQuantity);
         }
         actualTask = (Task)random;
-        Debug.LogWarning(actualTask.ToString());
+        Debug.Log(actualTask.ToString());
     }
 
     public void TaskCompleted()

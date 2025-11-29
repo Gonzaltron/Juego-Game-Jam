@@ -1759,6 +1759,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e1bda5820394747b282055280b008b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EatIcon: {fileID: 1891796931}
+  DrinkIcon: {fileID: 940380051}
+  SmokeIcon: {fileID: 1705329530}
 --- !u!1 &1869550105
 GameObject:
   m_ObjectHideFlags: 0
@@ -2303,8 +2306,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 174516047}
   - {fileID: 1360648282}
-  - {fileID: 1825588252}
   - {fileID: 181917722}
+  - {fileID: 1825588252}
   - {fileID: 708259509}
   - {fileID: 1172734623}
   - {fileID: 1363304266}

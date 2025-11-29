@@ -4,9 +4,9 @@ using UnityEngine.UIElements;
 public class HUDManager : MonoBehaviour
 {
     [Header("Task Icons")]
-    [SerializeField] public Image EatIcon;
-    [SerializeField] public Image DrinkIcon;
-    [SerializeField] public Image SmokeIcon;
+    [SerializeField] public GameObject EatIcon;
+    [SerializeField] public GameObject DrinkIcon;
+    [SerializeField] public GameObject SmokeIcon;
 
     void Start()
     {
@@ -23,19 +23,19 @@ public class HUDManager : MonoBehaviour
         switch (GameManager.Instance.taskManager.actualTask)
         {
             case Task.Eat:
-                EatIcon.SetEnabled(true);
-                DrinkIcon.SetEnabled(false);
-                SmokeIcon.SetEnabled(false); 
+                EatIcon.SetActive(true);
+                DrinkIcon.SetActive(false);
+                SmokeIcon.SetActive(false); 
                 break;
             case Task.Drink:
-                EatIcon.SetEnabled(false);
-                DrinkIcon.SetEnabled(true);
-                SmokeIcon.SetEnabled(false);
+                EatIcon.SetActive(false);
+                DrinkIcon.SetActive(true);
+                SmokeIcon.SetActive(false);
                 break;
             case Task.Smoke:
-                EatIcon.SetEnabled(false);
-                DrinkIcon.SetEnabled(false);
-                SmokeIcon.SetEnabled(true);
+                EatIcon.SetActive(false);
+                DrinkIcon.SetActive(false);
+                SmokeIcon.SetActive(true);
                 break;
         }
     }
