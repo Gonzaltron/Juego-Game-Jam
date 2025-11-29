@@ -1,41 +1,81 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class Lungs : MonoBehaviour
 {
-    int lungstimer;
-    [SerializeField] int maxLungTimer;
-    [SerializeField] int LungRecovery;
+    [SerializeField] int MaxLungCap;
+    int CurrentLungCap;
+    [SerializeField] float DepletionWaitTime;
+    [SerializeField] TMPro.TextMeshProUGUI lungCapText;
+    bool recovery;
+    bool depleting;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        MaxLungCap = Random.Range(5000, 10001); //segundos de capacidad pulmonar * 1000
+        CurrentLungCap = MaxLungCap;
+        lungCapText.text = "Lung Capacity: " + CurrentLungCap.ToString();
+        StartCoroutine(DepleteLungCap());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Space) && depleting)
+        {
+            StopAllCoroutines();
+            recovery = true;
+        }
+        else if(Input.GetKeyUp(KeyCode.Space))
+        {
+            recovery = false;
+            StartCoroutine(DepleteLungCap());
+            depleting = true;
+        }
+
+        if(recovery)
+        {
+            StartCoroutine(RecoverLungCap());
+        }
+        else if(!recovery)
+        {
+            StopAllCoroutines();
+            StartCoroutine(DepleteLungCap());
+        }
     }
 
-    IEnumerator LungsT()
+    IEnumerator DepleteLungCap()
     {
-        for (int i = 0; i < maxLungTimer; i++)
+        while(CurrentLungCap > 0)
         {
-            yield return new WaitForSeconds(lungstimer);
-            //while(Input.GetKey(/*el que sea*/))
+            CurrentLungCap--;
+            lungCapText.text = "Lung Capacity: " + CurrentLungCap.ToString();
+            yield return new WaitForSeconds(DepletionWaitTime);
+        }
+        if(CurrentLungCap <= 0)
+        {
+            Debug.Log("Lungs depleted!");
+        }
+        
+        // Trigger game over or other effects here
+    }
+
+    IEnumerator RecoverLungCap()
+    {
+        depleting = false;
+        if(CurrentLungCap < MaxLungCap)
+        {
+            CurrentLungCap++;
+            lungCapText.text = "Lung Capacity: " + CurrentLungCap.ToString();
+            yield return new WaitForSeconds(DepletionWaitTime / 2);
+            if(CurrentLungCap == MaxLungCap)
             {
-                for(int j = 0; j < maxLungTimer; j++)
-                {
-                    yield return new WaitForSeconds(LungRecovery);
-                    i--;
-                    if (i == maxLungTimer)
-                    {
-                        break;
-                    }
-                }
+                recovery = false;
             }
         }
-        //se apaga la pantalla
+        depleting = true;
     }
 }
+
+

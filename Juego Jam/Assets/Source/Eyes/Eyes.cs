@@ -19,7 +19,7 @@ public class Eyes : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // Inicializar timer antes de arrancar la coroutine
+        
         timer = Random.Range(mintimer + 1, maxtimer + 2);
         timerGuardar = timer;
         StartCoroutine(Timer());
