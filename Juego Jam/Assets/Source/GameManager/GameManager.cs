@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
 
-    private TaskManager taskManager;
+    public TaskManager taskManager;
     private ScoreManager scoreManager;
 
     public float timeLeft;
@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
 
     public void EndRun()
     {
-
+        //Activar Menu de fin de partida
+        //Time.timeScale = 0f;
     }
 }
