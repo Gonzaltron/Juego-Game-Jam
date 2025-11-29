@@ -75,7 +75,7 @@ public class Eyes : MonoBehaviour
         for(int i = timer; i > 0; i--)
         {
             display = i;
-            Debug.Log("Tiempo: " + display);
+            //Debug.Log("Tiempo: " + display);
             debugText.text = "Tiempo: " + display;
             yield return new WaitForSeconds(0.25f);
             if (i >= timerGuardar * 0.75f)

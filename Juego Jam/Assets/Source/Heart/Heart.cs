@@ -58,7 +58,7 @@ public class Heart : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
         Debug.Log("Game Over");
-        
+        GameManager.Instance.EndRun();
         
         //se apaga la pantalla
     }

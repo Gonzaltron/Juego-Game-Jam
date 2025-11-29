@@ -58,6 +58,7 @@ public class Lungs : MonoBehaviour
             Debug.Log("Lungs depleted!");
         }
         
+        GameManager.Instance.EndRun();
         // Trigger game over or other effects here
     }
 
