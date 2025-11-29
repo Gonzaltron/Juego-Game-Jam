@@ -15,6 +15,7 @@ public class Righteye : MonoBehaviour
     int timerGuardar;
     int State;
     int NewState;
+    bool recovery;
     [SerializeField] PlayerManager playerManager;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
