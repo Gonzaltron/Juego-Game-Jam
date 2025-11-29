@@ -4,6 +4,7 @@ public class Menu : MonoBehaviour
 {
     [SerializeField] Canvas tutorial;
     [SerializeField] Canvas MenuCanvas;
+    [SerializeField] Canvas CreditsCanvas;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -11,6 +12,8 @@ public class Menu : MonoBehaviour
         MenuCanvas.enabled = true;
         tutorial = GameObject.Find("TutorialCanvas").GetComponent<Canvas>();
         tutorial.enabled = false;
+        CreditsCanvas = GameObject.Find("CreditsCanvas").GetComponent<Canvas>();
+        CreditsCanvas.enabled = false;
     }
 
     // Update is called once per frame
@@ -38,6 +41,18 @@ public class Menu : MonoBehaviour
     public void CloseTutorial()
     {
         tutorial.enabled = false;
+        MenuCanvas.enabled = true;
+    }
+
+    public void OpenCredits()
+    {
+        MenuCanvas.enabled = false;
+        CreditsCanvas.enabled = true;
+    }
+
+    public void CloseCredits()
+    {
+        CreditsCanvas.enabled = false;
         MenuCanvas.enabled = true;
     }
 }
