@@ -75,4 +75,9 @@ public class PlayerManager : MonoBehaviour
     {
         playerControls.FindActionMap(actionMapName).Disable();
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        GameManager.Instance.TryCompleteTask(other);
+    }
 }
