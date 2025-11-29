@@ -43,7 +43,6 @@ public class Heart : MonoBehaviour
         {
             display = i -1;
             yield return new WaitForSeconds(1);
-            Debug.Log("Tiempo: " + display);
             debugText.text = ("Tiempo: " + display);
         }
         StartCoroutine(QuickTime());
@@ -53,11 +52,9 @@ public class Heart : MonoBehaviour
     {
         for(int i = quickTime; i <= quickTime && i > 0; i--)
         {
-            Debug.Log("Presiona E! " + display);
             debugText.text = ("Presiona F! " + i);
             yield return new WaitForSeconds(1);
         }
-        Debug.Log("Game Over");
         GameManager.Instance.EndRun();
         
         //se apaga la pantalla

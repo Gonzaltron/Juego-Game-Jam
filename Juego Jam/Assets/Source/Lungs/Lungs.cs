@@ -26,7 +26,6 @@ public class Lungs : MonoBehaviour
     {
         if(playerManager.LungsTriggered && depleting)
         {
-            Debug.Log("Lungs recovery started");
             StopAllCoroutines();
             recovery = true;
         }
@@ -56,7 +55,7 @@ public class Lungs : MonoBehaviour
         }
         if(CurrentLungCap <= 0)
         {
-            Debug.Log("Lungs depleted!");
+            
         }
         
         GameManager.Instance.EndRun();

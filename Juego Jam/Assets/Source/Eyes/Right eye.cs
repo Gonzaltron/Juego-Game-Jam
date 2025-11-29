@@ -51,25 +51,21 @@ public class Righteye : MonoBehaviour
 
     void State1()
     {
-        Debug.Log("State 1 activated");
         stateText.text = "State 1";
     }
 
     void State2()
     {
-        Debug.Log("State 2 activated");
         stateText.text = "State 2";
     }
 
     void State3()
     {
-        Debug.Log("State 3 activated");
         stateText.text = "State 3";
     }
 
     void State4()
     {
-        Debug.Log("State 4 activated");
         stateText.text = "State 4";
         StartCoroutine(QuickTime());
     }
@@ -80,7 +76,6 @@ public class Righteye : MonoBehaviour
         for(int i = timer; i > 0; i--)
         {
             display = i;
-            //Debug.Log("Tiempo: " + display);
             debugText.text = "Tiempo: " + display;
             yield return new WaitForSeconds(0.25f);
             if (i >= timerGuardar * 0.75f)
@@ -126,11 +121,9 @@ public class Righteye : MonoBehaviour
     {
         for(int i = quickTime; i > 0; i--)
         {
-            Debug.Log("Presiona E! " + i);
             debugText.text = "Presiona E! " + i;
             yield return new WaitForSeconds(1f);
         }
-        Debug.Log("Game Over");
         // se apaga la pantalla
     }
 
