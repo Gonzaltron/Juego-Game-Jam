@@ -174,11 +174,11 @@
                 },
                 {
                     "name": "",
-                    "id": "3ea4d645-4504-4529-b061-ab81934c3752",
-                    "path": "<Joystick>/stick",
+                    "id": "0cc8e57b-3b83-495b-b8f4-d83661646c29",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -241,7 +241,7 @@
                 {
                     "name": "",
                     "id": "4f4649ac-64a8-4a73-af11-b3faef356a4d",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
