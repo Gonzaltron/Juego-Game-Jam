@@ -7,8 +7,13 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
 
     private TaskManager taskManager;
+    private ScoreManager scoreManager;
 
     public float timeLeft;
+
+    [Header("Preferences")]
+    [SerializeField] private float timeBetweenPoints = 10f;
+
     public static GameManager Instance
     {
         get
@@ -24,6 +29,7 @@ public class GameManager : MonoBehaviour
     private GameManager()
     {
         taskManager = new TaskManager();
+        scoreManager = new ScoreManager();
     }
 
     private void Awake()
@@ -34,6 +40,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         CreateTask();
+        StartCoroutine(scoreManager.scoreCounterCorrutine(timeBetweenPoints));
     }
 
     void Update()
@@ -66,5 +73,10 @@ public class GameManager : MonoBehaviour
                 CreateTask();
             }
         }
+    }
+
+    public void EndRun()
+    {
+
     }
 }
