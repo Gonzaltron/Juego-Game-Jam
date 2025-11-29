@@ -8,6 +8,7 @@ public class Heart : MonoBehaviour
     int timer;
     [SerializeField]int quickTime;
     [SerializeField] TMPro.TextMeshProUGUI debugText;
+    int display;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,22 +28,23 @@ public class Heart : MonoBehaviour
 
     IEnumerator Timer()
     {
-        timer = Random.Range(mintimer, maxtimer +1);
-        for(int i = timer; i <= timer&& i>0; i--)
+        timer = Random.Range(mintimer +1, maxtimer +2);
+        for(int i = timer; i <= timer&& i > 0; i--)
         {
+            display = i -1;
             yield return new WaitForSeconds(1);
-            Debug.Log("Tiempo: " + i);
-            debugText.text = "Tiempo: " + i;
+            Debug.Log("Tiempo: " + display);
+            debugText.text = ("Tiempo: " + display);
         }
         StartCoroutine(QuickTime());
     }
 
     IEnumerator QuickTime()
     {
-        for(int i = quickTime; i <= quickTime && i>0; i--)
+        for(int i = quickTime; i <= quickTime && i > 0; i--)
         {
-            Debug.Log("Presiona E! " + i);
-            debugText.text = "Presiona E! " + i;
+            Debug.Log("Presiona E! " + display);
+            debugText.text = ("Presiona E! " + i);
             yield return new WaitForSeconds(1);
         }
         Debug.Log("Game Over");
