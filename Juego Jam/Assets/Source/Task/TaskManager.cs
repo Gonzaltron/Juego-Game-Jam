@@ -8,54 +8,28 @@ public enum Task
     Smoke = 2,
 }
 
-public class TaskManager : MonoBehaviour
+public class TaskManager
 {
-    public static TaskManager TaskManagerInstance;
-
     public Task actualTask;
 
-    [Header("Task Parameters")]
-    [SerializeField] private float taskTimer = 7f;
-
-    public float timeLeft;
-    
-    private Coroutine timerCorrutine;
+    public float taskTimer = 10f;
 
     public void GenerateTask()
     {
         int maxQuantity = System.Enum.GetValues(typeof(Task)).Length;
         int random = Random.Range(0, maxQuantity);
         actualTask = (Task)random;
-
-        timeLeft = taskTimer;
-
-        if (timerCorrutine != null)
-        {
-            StopCoroutine(timerCorrutine);
-        }
-
-        timerCorrutine = StartCoroutine(Timer());
-    }
-
-    IEnumerator Timer()
-    {
-        while (timeLeft > 0)
-        {
-            timeLeft -= Time.deltaTime;
-            yield return null;
-        }
-
-        TaskFailed();
+        Debug.Log(actualTask.ToString());
     }
 
     public void TaskCompleted()
     {
-        GenerateTask();
+        Debug.Log("tarea completada");
     }
 
     public void TaskFailed()
     {
-
+        Debug.Log("tarea fallada");
     }
 }
 
