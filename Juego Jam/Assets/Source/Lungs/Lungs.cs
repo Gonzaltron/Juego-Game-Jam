@@ -55,7 +55,9 @@ public class Lungs : MonoBehaviour
         }
         if(CurrentLungCap <= 0)
         {
-            
+            Debug.LogWarning("Game Over: Lung Capacity Depleted");
+            depleting = false;
+            recovery = false;
         }
         
         GameManager.Instance.EndRun();
