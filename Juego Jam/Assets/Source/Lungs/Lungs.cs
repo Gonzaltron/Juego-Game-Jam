@@ -17,6 +17,7 @@ public class Lungs : MonoBehaviour
         MaxLungCap = Random.Range(5000, 10001); //segundos de capacidad pulmonar * 1000
         CurrentLungCap = MaxLungCap;
         lungCapText.text = "Lung Capacity: " + CurrentLungCap.ToString();
+        depleting = true;
         StartCoroutine(DepleteLungCap());
     }
 
@@ -65,15 +66,11 @@ public class Lungs : MonoBehaviour
     IEnumerator RecoverLungCap()
     {
         depleting = false;
-        if(CurrentLungCap < MaxLungCap)
+       if(CurrentLungCap < MaxLungCap)
         {
             CurrentLungCap++;
             lungCapText.text = "Lung Capacity: " + CurrentLungCap.ToString();
-            yield return new WaitForSeconds(DepletionWaitTime / 2);
-            if(CurrentLungCap == MaxLungCap)
-            {
-                recovery = false;
-            }
+            yield return new WaitForSeconds(DepletionWaitTime * 0.5f);
         }
         depleting = true;
     }
