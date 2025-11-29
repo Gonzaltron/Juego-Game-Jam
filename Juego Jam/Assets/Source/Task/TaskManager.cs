@@ -4,7 +4,7 @@ using System.Collections;
 public enum Task
 {
     Eat = 0,
-    Drink= 1,
+    Drink = 1,
     Smoke = 2,
 }
 
@@ -14,10 +14,16 @@ public class TaskManager
 
     public float taskTimer = 10f;
 
+    public int taskTries = 3;
+
     public void GenerateTask()
     {
         int maxQuantity = System.Enum.GetValues(typeof(Task)).Length;
         int random = Random.Range(0, maxQuantity);
+        while ((Task)random == actualTask)
+        {
+            random = Random.Range(0, maxQuantity);
+        }
         actualTask = (Task)random;
         Debug.Log(actualTask.ToString());
     }
@@ -30,6 +36,14 @@ public class TaskManager
     public void TaskFailed()
     {
         Debug.Log("tarea fallada");
+        if (taskTries == 0)
+        {
+            GameManager.Instance.EndRun();
+        }
+        else
+        {
+            taskTries--;
+        }
     }
 }
 
