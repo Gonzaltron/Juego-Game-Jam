@@ -16,6 +16,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private string lungs = "Lungs";
     [SerializeField] private string leftEye = "LeftEye";
     [SerializeField] private string rightEye = "RightEye";
+    [SerializeField] private string pause = "Pause";
+
 
     private InputAction movementAction;
     private InputAction rotationAction;
@@ -23,6 +25,7 @@ public class PlayerManager : MonoBehaviour
     private InputAction lungsAction;
     private InputAction leftEyeAction;
     private InputAction rightEyeAction;
+    private InputAction pauseAction;
 
     public Vector2 MovementInput { get; private set; }
     public Vector2 RotationInput { get; private set; }
@@ -30,6 +33,7 @@ public class PlayerManager : MonoBehaviour
     public bool LungsTriggered { get; private set; }
     public bool LeftEyeTriggered { get; private set; }
     public bool RightEyeTriggered { get; private set; }
+    public bool PauseTriggered { get; private set; }
 
     private void Awake()
     {
@@ -41,6 +45,7 @@ public class PlayerManager : MonoBehaviour
         lungsAction = mapReference.FindAction(lungs);
         leftEyeAction = mapReference.FindAction(leftEye);
         rightEyeAction = mapReference.FindAction(rightEye);
+        pauseAction = mapReference.FindAction(pause);
 
         SubscribeActionValuesToInputEvents();
     }
@@ -64,6 +69,10 @@ public class PlayerManager : MonoBehaviour
 
         rightEyeAction.performed += inputInfo => RightEyeTriggered = true;
         rightEyeAction.canceled += inputInfo => RightEyeTriggered = false;
+
+        pauseAction.performed += inputInfo => PauseTriggered = true;
+        pauseAction.canceled += inputInfo => PauseTriggered = false;
+
     }
 
     private void OnEnable()
