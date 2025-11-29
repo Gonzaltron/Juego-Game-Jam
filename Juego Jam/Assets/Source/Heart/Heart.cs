@@ -10,6 +10,7 @@ public class Heart : MonoBehaviour
     [SerializeField] TMPro.TextMeshProUGUI debugText;
     int display;
     [SerializeField] PlayerManager playerManager;
+    bool SameTime;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,6 +23,7 @@ public class Heart : MonoBehaviour
     {
         if(playerManager.HeartTriggered)
         {
+            SameTime = true;
             StopAllCoroutines();
             StartCoroutine(Timer());
         }
@@ -30,6 +32,7 @@ public class Heart : MonoBehaviour
     IEnumerator Timer()
     {
         timer = Random.Range(mintimer +1, maxtimer +2);
+        debugText.text = ("Tiempo: " + display);
         for(int i = timer; i <= timer&& i > 0; i--)
         {
             display = i -1;
