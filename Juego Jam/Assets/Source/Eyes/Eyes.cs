@@ -126,6 +126,8 @@ public class Eyes : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         Debug.Log("Game Over");
+
+        GameManager.Instance.EndRun();
         // se apaga la pantalla
     }
 }
