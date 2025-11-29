@@ -2939,8 +2939,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af3d760d80a7de14cafa66728bf6e272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseCanvas: {fileID: 0}
-  hudCanvas: {fileID: 0}
+  pauseCanvas: {fileID: 203678076}
+  hudCanvas: {fileID: 1825588251}
+  playerController: {fileID: 1172734620}
 --- !u!4 &1260642718
 Transform:
   m_ObjectHideFlags: 0

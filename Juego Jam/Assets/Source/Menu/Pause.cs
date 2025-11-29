@@ -6,6 +6,7 @@ public class Pause : MonoBehaviour
 {
     [SerializeField] Canvas pauseCanvas;
     [SerializeField] Canvas hudCanvas;
+    [SerializeField] FirstPersonController playerController;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,6 +21,9 @@ public class Pause : MonoBehaviour
       if(Input.GetKeyDown(KeyCode.Escape))
         {
             PauseGame();
+            Cursor.visible = true;
+            Cursor.visible = true;
+            
         }   
     }
 
@@ -27,14 +31,20 @@ public class Pause : MonoBehaviour
     {
         hudCanvas.enabled = false;
         pauseCanvas.enabled = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         Time.timeScale = 0f;
+        Sensitivity(0f);
     }
 
     public void ResumeGame()
     {
+        Time.timeScale = 1f;
         pauseCanvas.enabled = false;
         hudCanvas.enabled = true;
-        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Sensitivity(0.1f);
     }
 
     public void QuitGame()
@@ -49,7 +59,12 @@ public class Pause : MonoBehaviour
 
     public void MainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Main Menu");
+    }
+
+    void Sensitivity(float value)
+    {
+        playerController.mouseSensitivity = value;
     }
 
 }

@@ -6,7 +6,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float walkSpeed = 3f;
 
     [Header("Look Parameters")]
-    [SerializeField] private float mouseSensitivity = 0.1f;
+    [SerializeField] public float mouseSensitivity = 0.1f;
     [SerializeField] private float upDownLookRange = 80f;
 
     [Header("References")]
