@@ -30,7 +30,7 @@ public class Righteye : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         if(playerManager.LeftEyeTriggered)
+         if(playerManager.RightEyeTriggered)
         {
             if(timer >= maxtimer*0.9f)
             {

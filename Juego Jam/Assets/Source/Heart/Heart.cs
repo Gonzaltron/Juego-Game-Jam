@@ -23,16 +23,22 @@ public class Heart : MonoBehaviour
     {
         if(playerManager.HeartTriggered)
         {
-            SameTime = true;
-            StopAllCoroutines();
-            StartCoroutine(Timer());
+            if(!SameTime)
+            {
+                SameTime = true;
+                StopAllCoroutines();
+                StartCoroutine(Timer());
+            }
         }
     }
 
     IEnumerator Timer()
     {
         timer = Random.Range(mintimer +1, maxtimer +2);
-        debugText.text = ("Tiempo: " + display);
+        int initialTimer = timer;
+        debugText.text = ("Tiempo: " + initialTimer);
+        yield return new WaitForSeconds(0.1f);
+        SameTime = false;
         for(int i = timer; i <= timer&& i > 0; i--)
         {
             display = i -1;
