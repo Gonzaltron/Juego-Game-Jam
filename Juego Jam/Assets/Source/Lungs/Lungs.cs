@@ -9,7 +9,7 @@ public class Lungs : MonoBehaviour
     [SerializeField] float DepletionWaitTime;
     [SerializeField] TMPro.TextMeshProUGUI lungCapText;
     bool recovery;
-    bool depleting;
+    public bool depleting;
     [SerializeField] PlayerManager playerManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,6 +26,7 @@ public class Lungs : MonoBehaviour
     {
         if(playerManager.LungsTriggered && depleting)
         {
+            Debug.LogWarning("Lungs Recovery Started");
             StopAllCoroutines();
             recovery = true;
         }
@@ -66,12 +67,12 @@ public class Lungs : MonoBehaviour
 
     IEnumerator RecoverLungCap()
     {
-        depleting = false;
        if(CurrentLungCap < MaxLungCap)
         {
             CurrentLungCap++;
             lungCapText.text = "Lung Capacity: " + CurrentLungCap.ToString();
             yield return new WaitForSeconds(DepletionWaitTime * 0.5f);
+            depleting = true;
         }
         depleting = true;
     }
