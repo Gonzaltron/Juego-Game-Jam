@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
@@ -34,24 +36,32 @@ public class Menu : MonoBehaviour
 
     public void OpenTutorial()
     {
+        Button[] buttons = GameObject.Find("TutorialCanvas").GetComponentsInChildren<Button>();
+        EventSystem.current.SetSelectedGameObject(buttons[0].gameObject);
         MenuCanvas.enabled = false;
         tutorial.enabled = true;
     }
 
     public void CloseTutorial()
     {
+        Button[] buttons = GameObject.Find("MenuCanvas").GetComponentsInChildren<Button>();
+        EventSystem.current.SetSelectedGameObject(buttons[0].gameObject);
         tutorial.enabled = false;
         MenuCanvas.enabled = true;
     }
 
     public void OpenCredits()
     {
+        Button[] buttons = GameObject.Find("CreditsCanvas").GetComponentsInChildren<Button>();
+        EventSystem.current.SetSelectedGameObject(buttons[0].gameObject);
         MenuCanvas.enabled = false;
         CreditsCanvas.enabled = true;
     }
 
     public void CloseCredits()
     {
+        Button[] buttons = GameObject.Find("MenuCanvas").GetComponentsInChildren<Button>();
+        EventSystem.current.SetSelectedGameObject(buttons[0].gameObject);
         CreditsCanvas.enabled = false;
         MenuCanvas.enabled = true;
     }

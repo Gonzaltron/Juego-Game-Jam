@@ -7,6 +7,7 @@ public class Pause : MonoBehaviour
     [SerializeField] Canvas pauseCanvas;
     [SerializeField] Canvas hudCanvas;
     [SerializeField] FirstPersonController playerController;
+    [SerializeField] PlayerManager playerManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,7 +19,7 @@ public class Pause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      if(Input.GetKeyDown(KeyCode.Escape))
+      if(playerManager.PauseTriggered)
         {
             PauseGame();
             Cursor.visible = true;
