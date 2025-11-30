@@ -33,7 +33,7 @@ public class PlayerManager : MonoBehaviour
     public bool LungsTriggered { get; private set; }
     public bool LeftEyeTriggered { get; private set; }
     public bool RightEyeTriggered { get; private set; }
-    public bool PauseTriggered { get; private set; }
+    public bool PauseTriggered { get; set; }
 
     private void Awake()
     {

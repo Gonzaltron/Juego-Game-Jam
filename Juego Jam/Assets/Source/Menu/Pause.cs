@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 
 public class Pause : MonoBehaviour
 {
@@ -8,12 +10,11 @@ public class Pause : MonoBehaviour
     [SerializeField] Canvas hudCanvas;
     [SerializeField] FirstPersonController playerController;
     [SerializeField] PlayerManager playerManager;
+    public bool pausa;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        pauseCanvas = GameObject.Find("PauseCanvas").GetComponent<Canvas>();
-        pauseCanvas.enabled = false;
-        hudCanvas = GameObject.Find("HUD").GetComponent<Canvas>();
+        ResumeGame();
     }
 
     // Update is called once per frame
@@ -24,7 +25,7 @@ public class Pause : MonoBehaviour
             PauseGame();
             Cursor.visible = true;
             Cursor.visible = true;
-            
+            pausa = playerManager.PauseTriggered;
         }   
     }
 
@@ -36,6 +37,7 @@ public class Pause : MonoBehaviour
         Cursor.visible = true;
         Time.timeScale = 0f;
         Sensitivity(0f);
+        EventSystem.current.GetComponent<InputSystemUIInputModule>().enabled = true;
     }
 
     public void ResumeGame()
@@ -45,7 +47,9 @@ public class Pause : MonoBehaviour
         hudCanvas.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        EventSystem.current.GetComponent<InputSystemUIInputModule>().enabled = false;
         Sensitivity(0.1f);
+        playerManager.PauseTriggered = false;
     }
 
     public void QuitGame()

@@ -3107,6 +3107,7 @@ MonoBehaviour:
   hudCanvas: {fileID: 1825588251}
   playerController: {fileID: 1172734620}
   playerManager: {fileID: 1172734621}
+  pausa: 0
 --- !u!4 &1260642718
 Transform:
   m_ObjectHideFlags: 0
