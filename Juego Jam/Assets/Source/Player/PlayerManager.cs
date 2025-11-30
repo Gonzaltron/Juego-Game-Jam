@@ -18,7 +18,6 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private string rightEye = "RightEye";
     [SerializeField] private string pause = "Pause";
 
-
     private InputAction movementAction;
     private InputAction rotationAction;
     private InputAction heartAction;
