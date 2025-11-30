@@ -6,7 +6,7 @@ public class Heart : MonoBehaviour
 {
     [SerializeField]int mintimer;
     [SerializeField]int maxtimer;
-    int timer;
+    public int timer;
     [SerializeField]int quickTime;
     [SerializeField] TMPro.TextMeshProUGUI debugText;
     int display;
@@ -28,7 +28,7 @@ public class Heart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerManager.HeartTriggered)
+        if(playerManager.HeartTriggered && !pausa)
         {
             timed = true;
             SameTime = true;
@@ -51,11 +51,10 @@ public class Heart : MonoBehaviour
     {
         timed = false;
         timer--;
+        debugText.text = timer.ToString();
         yield return new WaitForSeconds(0.1f);
         SameTime = false;
-        display = timer;
         yield return new WaitForSeconds(1);
-        debugText.text = ("Tiempo: " + display);
 
         if(timer == 0)
         {
