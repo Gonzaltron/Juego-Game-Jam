@@ -8,6 +8,11 @@ public class HUDManager : MonoBehaviour
     [SerializeField] public GameObject DrinkIcon;
     [SerializeField] public GameObject SmokeIcon;
 
+    [Header("Progress Bars")]
+    [SerializeField] public GameObject HeartProgress;
+    [SerializeField] public GameObject LungsProgress;
+
+
     void Start()
     {
         
