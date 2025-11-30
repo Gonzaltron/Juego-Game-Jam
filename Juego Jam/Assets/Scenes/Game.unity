@@ -1779,7 +1779,7 @@ VideoPlayer:
   m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
-  m_Looping: 0
+  m_Looping: 1
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
@@ -3780,7 +3780,7 @@ VideoPlayer:
   m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
-  m_Looping: 0
+  m_Looping: 1
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
@@ -6406,9 +6406,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506cd93118f92e64abc0c6b3377b1047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eat: {fileID: 1777164634}
-  playerManager: {fileID: 1172734621}
-  player: {fileID: 1172734619}
 --- !u!4 &1982548048
 Transform:
   m_ObjectHideFlags: 0
