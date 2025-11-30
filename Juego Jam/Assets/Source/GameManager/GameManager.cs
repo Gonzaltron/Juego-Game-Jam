@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Preferences")]
     [SerializeField] private float timeBetweenPoints = 10f;
+    [SerializeField] AudioManager audioManager;
 
     public static GameManager Instance
     {
@@ -70,6 +71,18 @@ public class GameManager : MonoBehaviour
             if (taskObject.assignedTask == taskManager.actualTask)
             {
                 taskManager.TaskCompleted();
+                switch (taskManager.actualTask)
+                {
+                    case Task.Eat:
+                    audioManager.PlayEat();
+                    break;
+                    case Task.Drink:
+                    audioManager.PlayDrink();
+                    break;
+                    case Task.Smoke:
+                    audioManager.PlaySmoke();
+                    break; 
+                }
                 CreateTask();
             }
         }
