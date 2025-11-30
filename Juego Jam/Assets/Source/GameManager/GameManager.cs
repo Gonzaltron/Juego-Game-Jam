@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
 
     public TaskManager taskManager;
-    private ScoreManager scoreManager;
+    public ScoreManager scoreManager;
 
     public float timeLeft;
 

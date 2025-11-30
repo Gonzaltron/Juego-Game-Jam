@@ -8,9 +8,9 @@ public class HUDManager : MonoBehaviour
     [SerializeField] public GameObject DrinkIcon;
     [SerializeField] public GameObject SmokeIcon;
 
-    [Header("Progress Bars")]
-    [SerializeField] public GameObject HeartProgress;
-    [SerializeField] public GameObject LungsProgress;
+    [Header("Score")]
+    [SerializeField] public TMPro.TextMeshProUGUI Score;
+
 
 
     void Start()
@@ -21,6 +21,7 @@ public class HUDManager : MonoBehaviour
     void Update()
     {
         SetActiveTaskIcon();
+        Score.text = GameManager.Instance.scoreManager.score.ToString();
     }
 
     private void SetActiveTaskIcon()
