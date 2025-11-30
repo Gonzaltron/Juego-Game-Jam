@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.UI;
 
 public class Pause : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Pause : MonoBehaviour
     [SerializeField] FirstPersonController playerController;
     [SerializeField] PlayerManager playerManager;
     public bool pausa;
+    [SerializeField] Canvas gameOver;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,6 +37,8 @@ public class Pause : MonoBehaviour
         pauseCanvas.enabled = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        Button[] buttons = GameObject.Find("PauseCanvas").GetComponentsInChildren<Button>();
+        EventSystem.current.SetSelectedGameObject(buttons[0].gameObject);
         Time.timeScale = 0f;
         Sensitivity(0f);
         pausa = true;
@@ -45,6 +49,7 @@ public class Pause : MonoBehaviour
     {
         Time.timeScale = 1f;
         pauseCanvas.enabled = false;
+        gameOver.enabled = false;
         hudCanvas.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -73,6 +78,8 @@ public class Pause : MonoBehaviour
     {
         playerController.mouseSensitivity = value;
     }
+
+   
 
 }
 

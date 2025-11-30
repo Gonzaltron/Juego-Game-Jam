@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [Header("Preferences")]
     [SerializeField] private float timeBetweenPoints = 10f;
     [SerializeField] AudioManager audioManager;
+    [SerializeField] GameOver pausa;
 
     public static GameManager Instance
     {
@@ -90,7 +91,6 @@ public class GameManager : MonoBehaviour
 
     public void EndRun()
     {
-        //Activar Menu de fin de partida
-        //Time.timeScale = 0f;
+        pausa.Gameover();
     }
 }

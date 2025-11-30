@@ -18,7 +18,7 @@ public class Lungs : MonoBehaviour
 
 void Start()
 {
-    MaxLungCap = Random.Range(5, 11);
+    MaxLungCap = Random.Range(12, 15);
     CurrentLungCap = MaxLungCap;
     lungCapText.text = CurrentLungCap.ToString();
     DepletionWaitTime = 1f;

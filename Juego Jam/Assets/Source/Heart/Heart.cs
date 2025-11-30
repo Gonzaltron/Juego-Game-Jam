@@ -58,21 +58,9 @@ public class Heart : MonoBehaviour
 
         if(timer == 0)
         {
-            StartCoroutine(QuickTime());
+            GameManager.Instance.EndRun();
         }
         timed = true;
         
-    }
-
-    IEnumerator QuickTime()
-    {
-        for(int i = quickTime; i <= quickTime && i > 0; i--)
-        {
-            debugText.text = ("Presiona F! " + i);
-            yield return new WaitForSeconds(1);
-        }
-        GameManager.Instance.EndRun();
-        
-        //se apaga la pantalla
     }
 }
