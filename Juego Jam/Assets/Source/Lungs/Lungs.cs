@@ -6,7 +6,7 @@ using UnityEditor.Rendering;
 public class Lungs : MonoBehaviour
 {
     [SerializeField] int MaxLungCap;
-    int CurrentLungCap;
+    public int CurrentLungCap;
     [SerializeField] float DepletionWaitTime;
     [SerializeField] TMPro.TextMeshProUGUI lungCapText;
     bool recovery;
@@ -31,7 +31,7 @@ public class Lungs : MonoBehaviour
     void Update()
     {
         pausa = pause.pausa;
-        if(playerManager.LungsTriggered && depleting)
+        if(playerManager.LungsTriggered && depleting && !pausa)
         {
             Debug.LogWarning("Lungs Recovery Started");
             StopAllCoroutines();
@@ -42,12 +42,12 @@ public class Lungs : MonoBehaviour
             recovery = false;
         }
 
-        if(recovery)
+        if(recovery && !pausa)
         {
             timed = true;
             StartCoroutine(RecoverLungCap());
         }
-        else if(!recovery)
+        else if(!recovery && !pausa && CurrentLungCap <= 0)
         {
             StopAllCoroutines();
             StartCoroutine(DepleteLungCap());
@@ -62,10 +62,6 @@ public class Lungs : MonoBehaviour
     IEnumerator DepleteLungCap()
     {
         timed = false;
-        CurrentLungCap--;
-        lungCapText.text = "Lung Capacity: " + CurrentLungCap.ToString();
-        yield return new WaitForSeconds(DepletionWaitTime);
-        timed = true;
         if(CurrentLungCap <= 0)
         {
             Debug.LogWarning("Game Over: Lung Capacity Depleted");
@@ -73,20 +69,29 @@ public class Lungs : MonoBehaviour
             recovery = false;
             GameManager.Instance.EndRun();
         }
+        else
+        {
+            CurrentLungCap--;
+            lungCapText.text = "Lung Capacity: " + CurrentLungCap.ToString();
+            yield return new WaitForSeconds(DepletionWaitTime);    
+        }
+        timed = true;
         
         // Trigger game over or other effects here
     }
 
     IEnumerator RecoverLungCap()
     {
+        timed = false;
        if(CurrentLungCap < MaxLungCap)
         {
             CurrentLungCap++;
             lungCapText.text = "Lung Capacity: " + CurrentLungCap.ToString();
-            yield return new WaitForSeconds(DepletionWaitTime * 0.5f);
+            yield return new WaitForSeconds(DepletionWaitTime * 0.1f);
             depleting = true;
         }
         depleting = true;
+        timed = true;
     }
 }
 
