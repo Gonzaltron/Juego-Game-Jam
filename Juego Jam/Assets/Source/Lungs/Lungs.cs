@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using UnityEditor.Rendering;
 
 public class Lungs : MonoBehaviour
 {
@@ -11,19 +12,25 @@ public class Lungs : MonoBehaviour
     bool recovery;
     public bool depleting;
     [SerializeField] PlayerManager playerManager;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] Pause pause;
+    bool pausa;
+    bool timed;
+    // Start is called once before
+    // the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         MaxLungCap = Random.Range(5000, 10001); //segundos de capacidad pulmonar * 1000
         CurrentLungCap = MaxLungCap;
         lungCapText.text = "Lung Capacity: " + CurrentLungCap.ToString();
         depleting = true;
+        timed = true;
         StartCoroutine(DepleteLungCap());
     }
 
     // Update is called once per frame
     void Update()
     {
+        pausa = pause.pausa;
         if(playerManager.LungsTriggered && depleting)
         {
             Debug.LogWarning("Lungs Recovery Started");
@@ -37,6 +44,7 @@ public class Lungs : MonoBehaviour
 
         if(recovery)
         {
+            timed = true;
             StartCoroutine(RecoverLungCap());
         }
         else if(!recovery)
@@ -44,24 +52,28 @@ public class Lungs : MonoBehaviour
             StopAllCoroutines();
             StartCoroutine(DepleteLungCap());
         }
+
+        if(!pausa && CurrentLungCap > 0 && timed)
+        {
+            StartCoroutine(DepleteLungCap());
+        }
     }
 
     IEnumerator DepleteLungCap()
     {
-        while(CurrentLungCap > 0)
-        {
-            CurrentLungCap--;
-            lungCapText.text = "Lung Capacity: " + CurrentLungCap.ToString();
-            yield return new WaitForSeconds(DepletionWaitTime);
-        }
+        timed = false;
+        CurrentLungCap--;
+        lungCapText.text = "Lung Capacity: " + CurrentLungCap.ToString();
+        yield return new WaitForSeconds(DepletionWaitTime);
+        timed = true;
         if(CurrentLungCap <= 0)
         {
             Debug.LogWarning("Game Over: Lung Capacity Depleted");
             depleting = false;
             recovery = false;
+            GameManager.Instance.EndRun();
         }
         
-        GameManager.Instance.EndRun();
         // Trigger game over or other effects here
     }
 

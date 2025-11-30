@@ -17,6 +17,9 @@ public class Lefteye : MonoBehaviour
     int NewState;
     [SerializeField] PlayerManager playerManager;
     bool recovery;
+    [SerializeField] Pause pause;
+    bool pausa;
+    bool timed;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,6 +33,7 @@ public class Lefteye : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        pausa = pause.pausa;
         if(playerManager.LeftEyeTriggered)
         {
             if(timer >= maxtimer*0.9f)
@@ -44,7 +48,11 @@ public class Lefteye : MonoBehaviour
                     StartCoroutine(Recovery());
                 }
             }
-            StartCoroutine(Timer());
+
+            if(timed && !pausa)
+            {
+                StartCoroutine(Timer());
+            }
         }
         
     }
@@ -73,48 +81,46 @@ public class Lefteye : MonoBehaviour
 
     IEnumerator Timer()
     {
-        for(int i = timer; i > 0; i--)
+        timed = false;
+        timer--;
+        debugText.text = "Tiempo: " + display;
+        yield return new WaitForSeconds(0.25f);
+        if (timer >= timerGuardar * 0.75f)
         {
-            display = i;
-            debugText.text = "Tiempo: " + display;
-            yield return new WaitForSeconds(0.25f);
-            if (i >= timerGuardar * 0.75f)
-            {
-                NewState = 1;
-            }
-            else if (i >= timerGuardar * 0.5f)
-            {
-                NewState = 2;
-            }
-            else if (i >= timerGuardar * 0.25f)
-            {
-                NewState = 3;
-            }
-            else
-            {
-                NewState = 4;
-            }
-            if (state != NewState)
-            {
-                state = NewState;
-                switch (state)
-                {
-                    case 1:
-                        State1();
-                        break;
-                    case 2:
-                        State2();
-                        break;
-                    case 3:
-                        State3();
-                        break;
-                    case 4:
-                        State4();
-                        break;
-                }
-            }
-            timer = i;
+            NewState = 1;
         }
+        else if (timer >= timerGuardar * 0.5f)
+        {
+            NewState = 2;
+        }
+        else if (timer >= timerGuardar * 0.25f)
+        {
+            NewState = 3;
+        }
+        else
+        {
+            NewState = 4;
+        }
+        if (state != NewState)
+        {
+            state = NewState;
+            switch (state)
+            {
+                case 1:
+                    State1();
+                    break;
+                case 2:
+                    State2();
+                    break;
+                case 3:
+                    State3();
+                    break;
+                case 4:
+                    State4();
+                    break;
+            }
+        }
+        timed = true;
     }
 
     IEnumerator QuickTime()

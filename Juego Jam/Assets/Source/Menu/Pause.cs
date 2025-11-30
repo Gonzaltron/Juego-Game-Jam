@@ -37,6 +37,7 @@ public class Pause : MonoBehaviour
         Cursor.visible = true;
         Time.timeScale = 0f;
         Sensitivity(0f);
+        pausa = true;
         EventSystem.current.GetComponent<InputSystemUIInputModule>().enabled = true;
     }
 
@@ -50,6 +51,7 @@ public class Pause : MonoBehaviour
         EventSystem.current.GetComponent<InputSystemUIInputModule>().enabled = false;
         Sensitivity(0.1f);
         playerManager.PauseTriggered = false;
+        pausa = false;
     }
 
     public void QuitGame()

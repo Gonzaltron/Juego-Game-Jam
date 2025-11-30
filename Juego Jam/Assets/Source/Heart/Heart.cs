@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEditor.Rendering;
 
 public class Heart : MonoBehaviour
 {
@@ -11,11 +12,17 @@ public class Heart : MonoBehaviour
     int display;
     [SerializeField] PlayerManager playerManager;
     bool SameTime;
+    [SerializeField] Pause pause;
+    bool pausa;
+    bool timed;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         StartCoroutine(Timer());
+        maxtimer = Random.Range(mintimer +1, maxtimer +2);
+        timer = maxtimer;
+        timed = true;
     }
 
     // Update is called once per frame
@@ -23,10 +30,18 @@ public class Heart : MonoBehaviour
     {
         if(playerManager.HeartTriggered)
         {
-            if(!SameTime)
+            timed = true;
+            SameTime = true;
+            timer = maxtimer;
+            StopAllCoroutines();
+            StartCoroutine(Timer());
+            
+        }
+
+        if(!pausa)
+        {
+            if(timed)
             {
-                SameTime = true;
-                StopAllCoroutines();
                 StartCoroutine(Timer());
             }
         }
@@ -34,18 +49,20 @@ public class Heart : MonoBehaviour
 
     IEnumerator Timer()
     {
-        timer = Random.Range(mintimer +1, maxtimer +2);
-        int initialTimer = timer;
-        debugText.text = ("Tiempo: " + initialTimer);
+        timed = false;
+        timer--;
         yield return new WaitForSeconds(0.1f);
         SameTime = false;
-        for(int i = timer; i <= timer&& i > 0; i--)
+        display = timer;
+        yield return new WaitForSeconds(1);
+        debugText.text = ("Tiempo: " + display);
+
+        if(timer == 0)
         {
-            display = i -1;
-            yield return new WaitForSeconds(1);
-            debugText.text = ("Tiempo: " + display);
+            StartCoroutine(QuickTime());
         }
-        StartCoroutine(QuickTime());
+        timed = true;
+        
     }
 
     IEnumerator QuickTime()
