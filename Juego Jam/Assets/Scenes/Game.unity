@@ -5164,6 +5164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeLeft: 0
   timeBetweenPoints: 10
+  audioManager: {fileID: 1982548047}
 --- !u!1001 &1363304266
 PrefabInstance:
   m_ObjectHideFlags: 0
