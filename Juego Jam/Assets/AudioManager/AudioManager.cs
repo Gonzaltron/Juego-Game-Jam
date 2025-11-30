@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     float velocity;
     bool walk = false;
     [SerializeField] AudioSource drink;
+    [SerializeField] AudioSource smoke;
 
     void Start()
     {
@@ -28,7 +29,8 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySmoke()
     {
-        
+        smoke = GameObject.Find("Window").GetComponent<AudioSource>();
+        smoke.Play();
     }
 
     public void PlayDrink()
