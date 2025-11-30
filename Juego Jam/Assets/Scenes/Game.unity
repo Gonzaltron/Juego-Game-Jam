@@ -4328,7 +4328,7 @@ MonoBehaviour:
   debugText: {fileID: 247320066}
   stateText: {fileID: 1869550106}
   playerManager: {fileID: 1172734621}
-  pause: {fileID: 0}
+  pause: {fileID: 1260642717}
 --- !u!114 &1095731265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4347,7 +4347,7 @@ MonoBehaviour:
   debugText: {fileID: 1497544035}
   stateText: {fileID: 70074242}
   playerManager: {fileID: 1172734621}
-  pause: {fileID: 0}
+  pause: {fileID: 1260642717}
 --- !u!4 &1095731266
 Transform:
   m_ObjectHideFlags: 0
@@ -5098,10 +5098,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mintimer: 7
   maxtimer: 10
+  timer: 0
   quickTime: 5
   debugText: {fileID: 973100009}
   playerManager: {fileID: 1172734621}
-  pause: {fileID: 0}
+  pause: {fileID: 1260642717}
 --- !u!4 &1298388656
 Transform:
   m_ObjectHideFlags: 0
@@ -6863,7 +6864,7 @@ MonoBehaviour:
   lungCapText: {fileID: 1946392120}
   depleting: 0
   playerManager: {fileID: 1172734621}
-  pause: {fileID: 0}
+  pause: {fileID: 1260642717}
 --- !u!4 &1884332367
 Transform:
   m_ObjectHideFlags: 0
