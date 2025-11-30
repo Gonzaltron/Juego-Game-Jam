@@ -15,84 +15,69 @@ public class Lungs : MonoBehaviour
     [SerializeField] Pause pause;
     bool pausa;
     bool timed;
-    // Start is called once before
-    // the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+void Start()
+{
+    MaxLungCap = Random.Range(5, 11);
+    CurrentLungCap = MaxLungCap;
+    lungCapText.text = CurrentLungCap.ToString();
+    DepletionWaitTime = 1f;
+    depleting = true;
+    recovery = false;
+    StartCoroutine(ManageLungs());
+}
+
+void Update()
+{
+    pausa = pause.pausa;
+}
+
+IEnumerator ManageLungs()
+{
+    while (true)
     {
-        MaxLungCap = Random.Range(5000, 10001); //segundos de capacidad pulmonar * 1000
-        CurrentLungCap = MaxLungCap;
-        lungCapText.text = "Lung Capacity: " + CurrentLungCap.ToString();
-        depleting = true;
-        timed = true;
-        StartCoroutine(DepleteLungCap());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        pausa = pause.pausa;
-        if(playerManager.LungsTriggered && depleting && !pausa)
+        if (pausa)
         {
-            Debug.LogWarning("Lungs Recovery Started");
-            StopAllCoroutines();
-            recovery = true;
-        }
-       else if(!playerManager.LungsTriggered)
-        {
-            recovery = false;
+            yield return null;
+            continue;
         }
 
-        if(recovery && !pausa)
+        // si el jugador pulsa para recuperar
+        if (playerManager != null && playerManager.LungsTriggered)
         {
-            timed = true;
-            StartCoroutine(RecoverLungCap());
-        }
-        else if(!recovery && !pausa && CurrentLungCap <= 0)
-        {
-            StopAllCoroutines();
-            StartCoroutine(DepleteLungCap());
-        }
-
-        if(!pausa && CurrentLungCap > 0 && timed)
-        {
-            StartCoroutine(DepleteLungCap());
-        }
-    }
-
-    IEnumerator DepleteLungCap()
-    {
-        timed = false;
-        if(CurrentLungCap <= 0)
-        {
-            Debug.LogWarning("Game Over: Lung Capacity Depleted");
-            depleting = false;
-            recovery = false;
-            GameManager.Instance.EndRun();
+            if (CurrentLungCap < MaxLungCap)
+            {
+                CurrentLungCap++;
+                lungCapText.text = CurrentLungCap.ToString();
+                // espera un poco más rápido durante la recuperación
+                yield return new WaitForSeconds(DepletionWaitTime * 0.25f);
+            }
+            else
+            {
+                // ya al máximo, espera un frame
+                yield return null;
+            }
         }
         else
         {
-            CurrentLungCap--;
-            lungCapText.text = "Lung Capacity: " + CurrentLungCap.ToString();
-            yield return new WaitForSeconds(DepletionWaitTime);    
-        }
-        timed = true;
-        
-        // Trigger game over or other effects here
-    }
+            // depletar aire
+            if (CurrentLungCap <= 0)
+            {
+                Debug.LogWarning("Game Over: Lung Capacity Depleted");
+                depleting = false;
+                recovery = false;
+                GameManager.Instance.EndRun();
+                yield break;
+            }
 
-    IEnumerator RecoverLungCap()
-    {
-        timed = false;
-       if(CurrentLungCap < MaxLungCap)
-        {
-            CurrentLungCap++;
-            lungCapText.text = "Lung Capacity: " + CurrentLungCap.ToString();
-            yield return new WaitForSeconds(DepletionWaitTime * 0.1f);
-            depleting = true;
+            CurrentLungCap--;
+            lungCapText.text = CurrentLungCap.ToString();
+            yield return new WaitForSeconds(DepletionWaitTime);
         }
-        depleting = true;
-        timed = true;
     }
 }
+}
+
+
 
 
